@@ -1,0 +1,8 @@
+# Bước 1: Tạo lại venv mới
+python -m venv .venv
+
+# Bước 2: Kích hoạt
+.venv\Scripts\Activate.ps1
+
+# Bước 3: Cài thư viện
+pip install numpy matplotlib opencv-python
