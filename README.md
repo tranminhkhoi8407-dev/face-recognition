@@ -1,4 +1,4 @@
-# 🧠 Face Recognition with PCA (Eigenfaces)
+# Face Recognition with PCA (Eigenfaces)
 
 Face recognition system built **from scratch** using **Principal Component Analysis (PCA)** —
 also known as the **Eigenfaces** method — on the AT&T (ORL) face dataset.
@@ -7,7 +7,7 @@ The entire PCA pipeline is implemented manually with NumPy.
 
 ---
 
-## 📌 Overview
+## Overview
 
 This project demonstrates how linear algebra concepts — covariance matrices, eigenvalues,
 and eigenvectors — can be applied to solve a real-world computer vision problem.
@@ -16,7 +16,7 @@ using the top-k eigenfaces, then recognized via nearest-neighbor search in PCA s
 
 ---
 
-## 🗂 Dataset
+## Dataset
 
 **AT&T Face Database (ORL)**
 - 40 subjects × 10 grayscale images = **400 images total**
@@ -28,7 +28,7 @@ using the top-k eigenfaces, then recognized via nearest-neighbor search in PCA s
 
 ---
 
-## ⚙️ Pipeline
+## Pipeline
 
 | Step | Function | Description |
 |------|----------|-------------|
@@ -47,7 +47,7 @@ using the top-k eigenfaces, then recognized via nearest-neighbor search in PCA s
 → 1-NN    → predicted label
 ---
 
-## 📊 Results
+## Results
 
 | k (components) | Accuracy |
 |:--------------:|:--------:|
@@ -70,7 +70,7 @@ using the top-k eigenfaces, then recognized via nearest-neighbor search in PCA s
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Install dependencies
 
@@ -102,13 +102,13 @@ The program will:
 
 ---
 
-## 📦 Requirements
+## Requirements
 1. numpy
 
 2. opencv-python
 
 3. matplotlib
-## 📂 Project Structure
+## Project Structure
 
 ```plaintext
 project/
