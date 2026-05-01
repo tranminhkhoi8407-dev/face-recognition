@@ -103,11 +103,12 @@ The program will:
 ---
 
 ## Requirements
+
 1. numpy
-
 2. opencv-python
-
 3. matplotlib
+
+---
 ## Project Structure
 
 ```plaintext
