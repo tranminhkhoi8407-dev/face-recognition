@@ -61,7 +61,7 @@ using the top-k eigenfaces, then recognized via nearest-neighbor search in PCA s
 
 ---
 
-## 🖼 Outputs
+## Outputs
 
 | File | Description |
 |------|-------------|
