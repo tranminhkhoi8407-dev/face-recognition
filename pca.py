@@ -278,6 +278,62 @@ def show_eigenfaces(mean_face, sorted_eigenvectors, img_shape=(112, 92)):
 
 
 # ============================================================
+# BONUS 2: NHẬN DẠNG KHUÔN MẶT QUA WEBCAM
+# ============================================================
+def recognize_from_camera(mean_face, eigenfaces_k, train_weights, train_labels):
+    cap = cv2.VideoCapture(0)
+
+    if not cap.isOpened():
+        print("Không mở được camera.")
+        return
+
+    # Load Haar Cascade để detect mặt
+    face_cascade = cv2.CascadeClassifier(
+        cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
+    )
+
+    print("Nhấn 'q' để thoát.")
+
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            print("Không đọc được frame.")
+            break
+
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        # Detect face
+        faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+
+        for (x, y, w, h) in faces:
+            face = gray[y:y+h, x:x+w]
+
+            # Resize về đúng size dataset (112x92)
+            face_resized = cv2.resize(face, (92, 112))
+
+            # Flatten
+            face_vector = face_resized.flatten().astype(np.float64)
+
+            # Predict
+            label = recognize_face(
+                face_vector, mean_face, eigenfaces_k, train_weights, train_labels
+            )
+
+            # Vẽ bounding box + label
+            cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+            cv2.putText(frame, f"Person {label}", (x, y-10),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,255,0), 2)
+
+        cv2.imshow("Face Recognition", frame)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
+
+
+# ============================================================
 # HÀM MAIN: CHẠY TOÀN BỘ CHƯƠNG TRÌNH
 # ============================================================
 if __name__ == "__main__":
@@ -316,3 +372,15 @@ if __name__ == "__main__":
     print("=" * 50)
     best_idx = np.argmax(accuracies)
     print(f"  Accuracy cao nhất: {accuracies[best_idx]:.2f}% tại k = {k_values[best_idx]}")
+
+    # === BONUS 2: DỰ ĐOÁN MẶT DỰA TRÊN ORL DATABASE ===
+    choice = input("Bạn có muốn mở webcam không? (y/n): ")
+
+    if choice.lower() == 'y':
+        best_k = 80
+        eigenfaces_k, train_weights = extract_features(
+        X_normalized, sorted_eigenvectors, best_k
+    )
+        recognize_from_camera(mean_face, eigenfaces_k, train_weights, train_y)
+    else:
+        print("Chương trình đã kết thúc.")
