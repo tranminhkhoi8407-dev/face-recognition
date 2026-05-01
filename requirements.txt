@@ -6,3 +6,6 @@ python -m venv .venv
 
 # Bước 3: Cài thư viện
 pip install numpy matplotlib opencv-python
+
+# Bước 4: Chạy chương trình
+python pca.py
